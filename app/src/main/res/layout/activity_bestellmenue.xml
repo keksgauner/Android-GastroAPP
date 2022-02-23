@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Bestellmenue">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <TableRow
+            android:id="@+id/rowVorspeise"
+            android:layout_width="1000dp"
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/textVorspeise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="Vorspeise" />
+
+            <Button
+                android:id="@+id/buttonVorspeise"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
+                android:layout_marginRight="0dp"
+                android:text="Zur Auswahl" />
+        </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TableRow
+            android:id="@+id/rowHauptspeise"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textHauptspeise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Haupspeise" />
+
+            <Button
+                android:id="@+id/buttonHaupspeise"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
+                android:text="Zur Auswahl"/>
+
+        </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TableRow
+            android:id="@+id/rowNachspeise"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textNachspeise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Nachspeise" />
+
+            <Button
+                android:id="@+id/buttonNachspeise"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
+                android:text="Zur Auswahl"/>
+
+        </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TableRow
+            android:id="@+id/rowGetraenke"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textGetraenke"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Getränke" />
+
+            <Button
+                android:id="@+id/buttonGetraenke"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
+                android:text="Zur Auswahl"/>
+
+        </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TableRow
+            android:id="@+id/rowMenues"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textMenues"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Menüs" />
+
+            <Button
+                android:id="@+id/buttonMenues"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_weight=".2"
+                android:text="Zur Auswahl" />
+
+        </TableRow>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TableRow
+            android:id="@+id/rowTextBestellung"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textBestellung"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Ihre Bestellung" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/rowScrollBestellung"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <HorizontalScrollView
+                android:id="@+id/uebersichtScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:id="@+id/uebersichtLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textUebersichtBestellung"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="" />
+                </LinearLayout>
+            </HorizontalScrollView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/rowBestellen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <Button
+                android:id="@+id/buttonBestellen"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_weight=".1"
+                android:text="Bestellen" />
+
+        </TableRow>
+    </TableLayout>
+</android.support.constraint.ConstraintLayout>

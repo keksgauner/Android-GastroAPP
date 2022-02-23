@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/schindlers05/AndroidStudioProjects/GastroAPPAfterCrash/app/src/main/res/layout/activity_bestellmenue.xml" value="0.33" />
+        <entry key="..\:/Users/schindlers05/AndroidStudioProjects/GastroAPPAfterCrash/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/schindlers05/AndroidStudioProjects/GastroAPPAfterCrash/app/src/main/res/layout/activity_tableselect.xml" value="0.25" />
+        <entry key="..\:/Users/winsu/AndroidStudioProjects/GastroAPPAfterCrash/app/src/main/res/layout/activity_bestellen.xml" value="0.20969202898550723" />
+        <entry key="..\:/Users/winsu/AndroidStudioProjects/GastroAPPAfterCrash/app/src/main/res/layout/activity_bestellmenue.xml" value="0.31470588235294117" />
+        <entry key="..\:/Users/winsu/AndroidStudioProjects/GastroAPPAfterCrash/app/src/main/res/layout/activity_getraenke.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/winsu/AndroidStudioProjects/GastroAPPAfterCrash/app/src/main/res/layout/activity_haupspeise.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/winsu/AndroidStudioProjects/GastroAPPAfterCrash/app/src/main/res/layout/activity_hauptspeise.xml" value="0.20153985507246377" />
+        <entry key="..\:/Users/winsu/AndroidStudioProjects/GastroAPPAfterCrash/app/src/main/res/layout/activity_nachspeise.xml" value="0.20153985507246377" />
+        <entry key="..\:/Users/winsu/AndroidStudioProjects/GastroAPPAfterCrash/app/src/main/res/layout/activity_vorspeise.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tV_homeGreeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="137dp"
+        android:layout_marginBottom="40dp"
+        android:text="@string/Greeting"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/iV_homeLogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iV_homeLogo"
+        android:layout_width="149dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="73dp"
+        android:contentDescription="LOGO"
+        app:layout_constraintBottom_toTopOf="@+id/btn_homeNext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tV_homeGreeting"
+        app:srcCompat="@drawable/ic_logo_gastroapp" />
+
+    <Button
+        android:id="@+id/btn_homeNext"
+        android:layout_width="139dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="205dp"
+        android:text="@string/weiter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iV_homeLogo" />
+</android.support.constraint.ConstraintLayout>

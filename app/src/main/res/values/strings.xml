@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">GastroAPPAfterCrash</string>
+    <string name="Greeting">Herzlich Willkommen im denr \nGaststätte zum großen Gogockel</string>
+    <string name="weiter">Weiter</string>
+</resources>
