@@ -28,7 +28,7 @@
                 android:id="@+id/buttonVorspeise"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_weight=".2"
+                android:layout_weight=".6"
                 android:layout_marginRight="0dp"
                 android:text="Zur Auswahl" />
         </TableRow>
@@ -54,7 +54,7 @@
                 android:id="@+id/buttonHaupspeise"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:layout_weight=".2"
+                android:layout_weight=".6"
                 android:text="Zur Auswahl"/>
 
         </TableRow>
@@ -80,7 +80,7 @@
                 android:id="@+id/buttonNachspeise"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:layout_weight=".2"
+                android:layout_weight=".6"
                 android:text="Zur Auswahl"/>
 
         </TableRow>
@@ -106,7 +106,7 @@
                 android:id="@+id/buttonGetraenke"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:layout_weight=".2"
+                android:layout_weight=".6"
                 android:text="Zur Auswahl"/>
 
         </TableRow>
@@ -132,7 +132,7 @@
                 android:id="@+id/buttonMenues"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:layout_weight=".2"
+                android:layout_weight=".6"
                 android:text="Zur Auswahl" />
 
         </TableRow>
@@ -162,7 +162,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <HorizontalScrollView
+            <ScrollView
                 android:id="@+id/uebersichtScrollView"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
@@ -181,7 +181,7 @@
                         android:layout_weight="1"
                         android:text="" />
                 </LinearLayout>
-            </HorizontalScrollView>
+            </ScrollView>
         </TableRow>
 
         <TableRow
@@ -195,7 +195,7 @@
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_weight=".1"
-                android:text="Bestellen" />
+                android:text="Warenkorb" />
 
         </TableRow>
     </TableLayout>

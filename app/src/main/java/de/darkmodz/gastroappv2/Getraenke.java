@@ -113,7 +113,7 @@ public class Getraenke extends AppCompatActivity {
         /*
          * View konfiguration
          */
-        entry.setBackgroundColor(Color.DKGRAY);
+        entry.setBackgroundColor(Color.BLACK);
 
         return entry;
     }
@@ -152,7 +152,6 @@ public class Getraenke extends AppCompatActivity {
 
                 Bestellmenue.getInventory().add("Trinken", splitted[0] + ";" + splitted[1] + ";" + splitted[2]);
                 Bestellmenue.getInventory().update();
-                finish();
             }
         });
     }

@@ -10,10 +10,17 @@ public class Inventory {
     private HashMap<String, ArrayList<String>> inventar = new HashMap<String, ArrayList<String>>();
     private TextView view;
     private String build;
-    private float gesammtpreis;
+    private float gesamtpreis;
 
     public Inventory(TextView view) {
         this.view = view;
+    }
+
+    public HashMap<String, ArrayList<String>> getMap() {
+        return inventar;
+    }
+    public float getCurrentPrize() {
+        return gesamtpreis;
     }
 
     public void add(String what, String entry) {
@@ -25,32 +32,37 @@ public class Inventory {
         }
     }
 
+    public void remove(String what, String entry) {
+        if(inventar.get(what) != null)
+            inventar.get(what).remove(entry);
+    }
+
     public void update() {
         build = "";
-        gesammtpreis = 0;
+        gesamtpreis = 0;
         for (String vaule : inventar.keySet()) {
-                build += "\n" + vaule + ": ";
+                build += "\n" + vaule + ": \n";
                 for (int i=0; i < inventar.get(vaule).size(); i++) {
                     String[] splitted = inventar.get(vaule).get(i).split(";");
-                    build += " " + splitted[1] + "/" + splitted[2] + "\n";
-                    gesammtpreis += Float.valueOf(splitted[2]);
+                    build += " - " + splitted[1] + "/" + splitted[2] + "\n";
+                    gesamtpreis += Float.valueOf(splitted[2]);
 
                 }
         }
-        gesammtpreis = Math.round(gesammtpreis*100);
-        gesammtpreis = gesammtpreis/100;
+        gesamtpreis = Math.round(gesamtpreis*100);
+        gesamtpreis /= 100;
 
-        build += "\n" + "Aktuell bei " + gesammtpreis + " Euro";
+        build += "\n" + "Aktuell bei " + gesamtpreis + " Euro";
         view.setText(build);
     }
 
-    public void absenden() {
+    public void absenden(int accountID, int tabelID) {
         for (String vaule : inventar.keySet()) {
             for (int i=0; i < inventar.get(vaule).size(); i++) {
                 String[] splitted = inventar.get(vaule).get(i).split(";");
                 System.out.println("Database send insert request");
 
-                new Request().sendOrder(0, 1, Integer.valueOf(splitted[0]));
+                new Request().sendOrder(accountID, tabelID, Integer.valueOf(splitted[0]));
 
             }
         }

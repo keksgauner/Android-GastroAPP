@@ -28,7 +28,7 @@ public class Request {
                             "`Tables`.`Nummer`, " +
                             "`Tables`.`Ort` " +
                             "FROM `Tables` " +
-                            "WHERE 1;");
+                            "WHERE 1 ORDER BY `Tables`.`ID` ASC;");
 
                     HashMap<String,String> result = new HashMap<>();
 
@@ -60,10 +60,11 @@ public class Request {
                             "`Products`.`Name`, " +
                             "`Products`.`Price`, " +
                             "`Products`.`Description`, " +
-                            "`Products`.`Available`" +
+                            "`Products`.`Available`, " +
+                            "`Products`.`Weight`" +
                             "FROM `Products` " +
                             "LEFT JOIN `Type` ON `Type`.`Name` = '" + name +"' " +
-                            "WHERE `TypeID` = `Type`.`ID`;");
+                            "WHERE `TypeID` = `Type`.`ID` ORDER BY `Products`.`Weight` ASC;");
 
                     HashMap<String,String> result = new HashMap<>();
 
@@ -131,7 +132,7 @@ public class Request {
                             "LEFT JOIN `Products` ON `Products`.`ID` = `Orders`.`ProductID` " +
                             "WHERE  `Products`.`ID` = `Orders`.`ProductID` " +
                             "AND `Products`.`TypeID` = `Type`.`ID`" +
-                            "AND `Processing` = true;");
+                            "AND `Processing` = true ORDER BY `Orders`.`Timestamp` ASC;");
 
                     HashMap<String,String> result = new HashMap<>();
 

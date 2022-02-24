@@ -6,24 +6,56 @@
     android:layout_height="match_parent"
     tools:context=".Bestellen">
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="15dp"
-        android:text="Ihre bestellung wurde Abgegeben"
-        app:layout_constraintBottom_toTopOf="@+id/goback1"
+    <ScrollView
+        android:id="@+id/bestellenScrollView"
+        android:layout_width="417dp"
+        android:layout_height="596dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck">
 
-    <Button
-        android:id="@+id/goback1"
+        <LinearLayout
+            android:id="@+id/bestellenLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TableLayout
+                android:id="@+id/bestellenTableInvoices"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/textPreisBestellen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Weitere Bestellung"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSubmitbestellen"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/bestellenScrollView" />
+
+    <Button
+        android:id="@+id/buttonSubmitbestellen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bestellung Abgeben"
+        app:layout_constraintBottom_toTopOf="@+id/buttonZurueckBestellen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bestellenScrollView" />
+
+    <Button
+        android:id="@+id/buttonZurueckBestellen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Zurück"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>

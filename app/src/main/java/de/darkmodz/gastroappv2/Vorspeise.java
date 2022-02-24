@@ -9,7 +9,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -115,7 +114,7 @@ public class Vorspeise extends AppCompatActivity {
         /*
          * View konfiguration
          */
-        entry.setBackgroundColor(Color.DKGRAY);
+        entry.setBackgroundColor(Color.BLACK);
 
         return entry;
     }
@@ -154,7 +153,6 @@ public class Vorspeise extends AppCompatActivity {
 
                 Bestellmenue.getInventory().add("Vorspeise", splitted[0] + ";" + splitted[1] + ";" + splitted[2]);
                 Bestellmenue.getInventory().update();
-                finish();
             }
         });
     }

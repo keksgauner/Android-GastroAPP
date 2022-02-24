@@ -114,7 +114,7 @@ public class Hauptspeise extends AppCompatActivity {
         /*
          * View konfiguration
          */
-        entry.setBackgroundColor(Color.DKGRAY);
+        entry.setBackgroundColor(Color.BLACK);
 
         return entry;
     }
@@ -153,7 +153,6 @@ public class Hauptspeise extends AppCompatActivity {
 
                 Bestellmenue.getInventory().add("Hauptspeise", splitted[0] + ";" + splitted[1] + ";" + splitted[2]);
                 Bestellmenue.getInventory().update();
-                finish();
             }
         });
     }

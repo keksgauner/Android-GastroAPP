@@ -25,7 +25,7 @@ public class Tableselect extends AppCompatActivity {
      */
     private Tableselect context;
     private LinearLayout tableLayout;
-    private int Tischnummer;
+    private static int Tischnummer;
 
     /**
      * Methoden
@@ -38,7 +38,7 @@ public class Tableselect extends AppCompatActivity {
         return tableLayout;
     }
 
-    public int getTischnummer() {
+    public static int getTischnummer() {
         return Tischnummer;
     }
 

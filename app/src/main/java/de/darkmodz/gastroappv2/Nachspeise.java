@@ -114,7 +114,7 @@ public class Nachspeise extends AppCompatActivity {
         /*
          * View konfiguration
          */
-        entry.setBackgroundColor(Color.DKGRAY);
+        entry.setBackgroundColor(Color.BLACK);
 
         return entry;
     }
@@ -153,7 +153,6 @@ public class Nachspeise extends AppCompatActivity {
 
                 Bestellmenue.getInventory().add("Nachspeise", splitted[0] + ";" + splitted[1] + ";" + splitted[2]);
                 Bestellmenue.getInventory().update();
-                finish();
             }
         });
     }
