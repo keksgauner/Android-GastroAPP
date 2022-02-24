@@ -150,7 +150,7 @@ public class Getraenke extends AppCompatActivity {
                 Toast.makeText(getContext(), ""+splitted[1]+" wurde zur Liste hinzugefügt!",
                         Toast.LENGTH_SHORT).show();
 
-                Bestellmenue.getInventory().add("Getraenke", splitted[0] + ";" + splitted[1] + ";" + splitted[2]);
+                Bestellmenue.getInventory().add("Trinken", splitted[0] + ";" + splitted[1] + ";" + splitted[2]);
                 Bestellmenue.getInventory().update();
                 finish();
             }
@@ -188,7 +188,7 @@ public class Getraenke extends AppCompatActivity {
         /**
          * Request Vorspeisen
          */
-        new Request().getProducts("Getraenke", new RepositoryCallback<HashMap<String, String>>() {
+        new Request().getProducts("Trinken", new RepositoryCallback<HashMap<String, String>>() {
             @Override
             public void onComplete(HashMap<String, String> result) {
                 new Handler(Looper.getMainLooper()).post(new Runnable() {

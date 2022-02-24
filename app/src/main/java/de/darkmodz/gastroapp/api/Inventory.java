@@ -34,8 +34,12 @@ public class Inventory {
                     String[] splitted = inventar.get(vaule).get(i).split(";");
                     build += " " + splitted[1] + "/" + splitted[2] + "\n";
                     gesammtpreis += Float.valueOf(splitted[2]);
+
                 }
         }
+        gesammtpreis = Math.round(gesammtpreis*100);
+        gesammtpreis = gesammtpreis/100;
+
         build += "\n" + "Aktuell bei " + gesammtpreis + " Euro";
         view.setText(build);
     }
