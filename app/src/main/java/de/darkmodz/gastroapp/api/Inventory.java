@@ -10,7 +10,7 @@ public class Inventory {
     private HashMap<String, ArrayList<String>> inventar = new HashMap<String, ArrayList<String>>();
     private TextView view;
     private String build;
-    private float gesamtpreis;
+    private double gesamtpreis;
 
     public Inventory(TextView view) {
         this.view = view;
@@ -19,7 +19,7 @@ public class Inventory {
     public HashMap<String, ArrayList<String>> getMap() {
         return inventar;
     }
-    public float getCurrentPrize() {
+    public double getCurrentPrize() {
         return gesamtpreis;
     }
 
@@ -32,9 +32,9 @@ public class Inventory {
         }
     }
 
-    public void remove(String what, String entry) {
-        if(inventar.get(what) != null)
-            inventar.get(what).remove(entry);
+    public void remove(String what, int position) {
+        System.out.println("Inventory: Try to remove from position " + position);
+        inventar.get(what).remove(position);
     }
 
     public void update() {
@@ -45,7 +45,7 @@ public class Inventory {
                 for (int i=0; i < inventar.get(vaule).size(); i++) {
                     String[] splitted = inventar.get(vaule).get(i).split(";");
                     build += " - " + splitted[1] + "/" + splitted[2] + "\n";
-                    gesamtpreis += Float.valueOf(splitted[2]);
+                    gesamtpreis += Double.valueOf(splitted[2]);
 
                 }
         }

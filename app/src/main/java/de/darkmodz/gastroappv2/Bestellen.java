@@ -96,7 +96,7 @@ public class Bestellen extends AppCompatActivity {
          *  TextView Design festlegen
          */
         entry.setTextColor(Color.BLACK);
-        entry.setGravity(Gravity.CENTER);
+        entry.setGravity(Gravity.LEFT);
 
         /*
          * TextView konfiguration
@@ -166,7 +166,7 @@ public class Bestellen extends AppCompatActivity {
         tableLayout.addView(view);
     }
 
-    public void createButton(String catecory, String[] splitted){
+    public void createButton(String catecory, String[] splitted, int position){
 
         /*
          * Erstelle ein TableRow um zwei Objekte nebeneinander zu bekommen
@@ -198,10 +198,28 @@ public class Bestellen extends AppCompatActivity {
                 Toast.makeText(getContext(), ""+splitted[1]+" wurde aus der Liste gelöscht!",
                         Toast.LENGTH_SHORT).show();
 
-                Bestellmenue.getInventory().remove(catecory, splitted[0]);
+                Bestellmenue.getInventory().remove(catecory, position);
                 Bestellmenue.getInventory().update();
+                doReloadList();
             }
         });
+    }
+
+    public void doReloadList() {
+        tableLayout.removeAllViews();
+
+        /**
+         * Request Delete
+         */
+        for (String vaule : Bestellmenue.getInventory().getMap().keySet()) {
+            createCatecory(vaule);
+            for (int i=0; i < Bestellmenue.getInventory().getMap().get(vaule).size(); i++) {
+                String[] splitted = Bestellmenue.getInventory().getMap().get(vaule).get(i).split(";");
+                createButton(vaule, splitted, i);
+            }
+            TextView gesamt = findViewById(R.id.textPreisBestellen);
+            gesamt.setText("Es kostet " + Bestellmenue.getInventory().getCurrentPrize() + " Euro");
+        }
     }
 
     @Override
@@ -213,7 +231,6 @@ public class Bestellen extends AppCompatActivity {
          * Nutzerelemente hinzufügen
          */
         tableLayout = (TableLayout) findViewById(R.id.bestellenTableInvoices);
-        tableLayout.removeAllViews();
 
         /**
          * Variablen initialisieren
@@ -228,22 +245,16 @@ public class Bestellen extends AppCompatActivity {
 
         Button submit = findViewById(R.id.buttonSubmitbestellen);
         submit.setOnClickListener(view -> {
-            Toast.makeText(getContext(), "Bestellung wurde gesendet.", Toast.LENGTH_SHORT).show();
-
-            finish();
+            if(!Bestellmenue.getInventory().getMap().isEmpty()) {
+                Toast.makeText(getContext(), "Bestellung wurde gesendet.", Toast.LENGTH_SHORT).show();
+                Bestellmenue.getInventory().absenden(0, Tableselect.getTischnummer());
+                finish();
+            } else
+                Toast.makeText(getContext(), "Bestellung konnte nicht gesendet werden!", Toast.LENGTH_SHORT).show();
             }
         );
 
-        //inventory.absenden(0, Tableselect.getTischnummer());
-        /**
-         * Request Delete
-         */
-        for (String vaule : Bestellmenue.getInventory().getMap().keySet()) {
-            createCatecory(vaule);
-            for (int i=0; i < Bestellmenue.getInventory().getMap().get(vaule).size(); i++) {
-                String[] splitted = Bestellmenue.getInventory().getMap().get(vaule).get(i).split(";");
-                createButton(vaule, splitted);
-            }
-        }
+        doReloadList();
+
     }
 }

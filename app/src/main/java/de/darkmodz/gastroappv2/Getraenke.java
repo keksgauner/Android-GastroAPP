@@ -73,7 +73,7 @@ public class Getraenke extends AppCompatActivity {
          *  TextView Design festlegen
          */
         entry.setTextColor(Color.BLACK);
-        entry.setGravity(Gravity.CENTER);
+        entry.setGravity(Gravity.LEFT);
 
         /*
          * TextView konfiguration

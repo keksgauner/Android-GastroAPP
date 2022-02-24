@@ -112,8 +112,7 @@ public class Bestellmenue extends AppCompatActivity {
         buttonBestellen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!inventory.getMap().isEmpty())
-                    switchTo("Bestellen");
+                switchTo("Bestellen");
             }
         });
 
