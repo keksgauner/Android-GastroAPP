@@ -175,22 +175,20 @@ public class Abrechnung extends AppCompatActivity {
         tableLayout.removeAllViews();
         gesamtpreis = 0;
 
-        request("Vorspeise");
-        request("Hauptspeise");
-        request("Nachspeise");
-        request("Trinken");
+        request();
         //request("Menues");
 
     }
 
-    public void request(String name) {
+    public void request() {
         /**
          * Request Product
          */
-        new Request().getCurrentOrders(name, new RepositoryCallback<HashMap<String, String>>() {
+        new Request().getCurrentOrders(Tableselect.getTischnummer(), new RepositoryCallback<HashMap<String, String>>() {
             @Override
             public void onComplete(HashMap<String, String> result) {
 
+                if(result != null)
                 for (String vaule : result.keySet()) {
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
@@ -214,8 +212,13 @@ public class Abrechnung extends AppCompatActivity {
     }
 
     public void setText(String text) {
-        TextView feedback = findViewById(R.id.textAbrechnung);
-        feedback.setText(text);
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                TextView feedback = findViewById(R.id.textAbrechnung);
+                feedback.setText(text);
+            }
+        });
 
     }
 

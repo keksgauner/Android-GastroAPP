@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">GastroAPP</string>
-    <string name="Greeting">Herzlich Willkommen im denr \nGaststätte zum großen Gogockel</string>
+    <string name="Greeting">Herzlich Willkommen im der \nGaststätte zum großen Gogockel</string>
     <string name="weiter">Weiter</string>
 </resources>
