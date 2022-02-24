@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 import de.darkmodz.gastroapp.api.RepositoryCallback;
 import de.darkmodz.gastroapp.api.Request;
@@ -197,8 +198,6 @@ public class Bestellen extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(getContext(), ""+splitted[1]+" wurde aus der Liste gelöscht!",
                         Toast.LENGTH_SHORT).show();
-
-                MainActivity.setCostomColorClick(button, Color.BLACK, Color.RED);
 
                 Bestellmenue.getInventory().remove(catecory, position);
                 Bestellmenue.getInventory().update();
