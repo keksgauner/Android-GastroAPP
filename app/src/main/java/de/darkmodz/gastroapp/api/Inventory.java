@@ -32,8 +32,8 @@ public class Inventory {
                 build += "\n" + vaule + ": ";
                 for (int i=0; i < inventar.get(vaule).size(); i++) {
                     String[] splitted = inventar.get(vaule).get(i).split(";");
-                    build += " " + splitted[1] + "\n";
-                    gesammtpreis += Float.valueOf(splitted[1]);
+                    build += " " + splitted[1] + "/" + splitted[2] + "\n";
+                    gesammtpreis += Float.valueOf(splitted[2]);
                 }
         }
         build += "\n" + "Aktuell bei " + gesammtpreis + " Euro";

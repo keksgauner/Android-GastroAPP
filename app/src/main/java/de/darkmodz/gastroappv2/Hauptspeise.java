@@ -151,7 +151,7 @@ public class Hauptspeise extends AppCompatActivity {
                 Toast.makeText(getContext(), ""+splitted[1]+" wurde zur Liste hinzugefügt!",
                         Toast.LENGTH_SHORT).show();
 
-                Bestellmenue.getInventory().add("Hauptspeise", splitted[0] + ";" + splitted[1] + "/" + splitted[2]);
+                Bestellmenue.getInventory().add("Hauptspeise", splitted[0] + ";" + splitted[1] + ";" + splitted[2]);
                 Bestellmenue.getInventory().update();
                 finish();
             }

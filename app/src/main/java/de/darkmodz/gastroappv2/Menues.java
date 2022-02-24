@@ -150,7 +150,7 @@ public class Menues extends AppCompatActivity {
                 Toast.makeText(getContext(), ""+splitted[1]+" wurde zur Liste hinzugefügt!",
                         Toast.LENGTH_SHORT).show();
 
-                Bestellmenue.getInventory().add("Menues", splitted[0] + ";" + splitted[1] + "/" + splitted[2]);
+                Bestellmenue.getInventory().add("Menues", splitted[0] + ";" + splitted[1] + ";" + splitted[2]);
                 Bestellmenue.getInventory().update();
                 finish();
             }
