@@ -179,10 +179,7 @@ public class Abrechnung extends AppCompatActivity {
         request("Hauptspeise");
         request("Nachspeise");
         request("Trinken");
-        request("Menues");
-
-        TextView feedback = findViewById(R.id.textAbrechnung);
-        feedback.setText("Aktuell bei " + gesamtpreis + " Euro");
+        //request("Menues");
 
     }
 
@@ -201,13 +198,24 @@ public class Abrechnung extends AppCompatActivity {
                             String[] splitted = result.get(vaule).split(";");
                             createButton(Integer.valueOf(splitted[0]), splitted);
                             gesamtpreis += Double.valueOf(splitted[2]);
+                            //System.out.println("Abrechnug: " + gesamtpreis + " mit " + splitted[2]);
                         }
                     });
                 }
+
+                gesamtpreis = Math.round(gesamtpreis*100);
+                gesamtpreis /= 100;
+                setText("Aktuell bei " + gesamtpreis + " Euro");
+                //System.out.println("Aktuell bei " + gesamtpreis + " Euro");
+
             }
         });
-        gesamtpreis = Math.round(gesamtpreis*100);
-        gesamtpreis /= 100;
+
+    }
+
+    public void setText(String text) {
+        TextView feedback = findViewById(R.id.textAbrechnung);
+        feedback.setText(text);
 
     }
 
