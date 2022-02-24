@@ -123,6 +123,7 @@ public class Request {
                             "`Orders`.`TabelID`, " +
                             "`Orders`.`ProductID`, " +
                             "`Products`.`Name`, " +
+                            "`Products`.`Price`, " +
                             "`Orders`.`Quantity`, " +
                             "`Orders`.`Paid`, " +
                             "`Orders`.`Processing`," +
@@ -131,8 +132,10 @@ public class Request {
                             "LEFT JOIN `Type` ON `Type`.`Name` = '" + name +"' " +
                             "LEFT JOIN `Products` ON `Products`.`ID` = `Orders`.`ProductID` " +
                             "WHERE  `Products`.`ID` = `Orders`.`ProductID` " +
-                            "AND `Products`.`TypeID` = `Type`.`ID`" +
-                            "AND `Processing` = true ORDER BY `Orders`.`Timestamp` ASC;");
+                            "AND `Products`.`TypeID` = `Type`.`ID` " +
+                            "AND `Orders`.`Paid` = false " +
+                            "AND `Processing` = true "  +
+                            ";");
 
                     HashMap<String,String> result = new HashMap<>();
 
@@ -140,7 +143,7 @@ public class Request {
                     {
                         HashMap<String,String> oneMap = results.getData().get(i);
                         // `ID`, `AccountID`, `TabelID`, `ProductID`, `Quantity`, `Paid`, `Processing`, `Timestamp`
-                        result.put(oneMap.get("ID"), oneMap.get("ID") + ";" + oneMap.get("Name") + ";" + oneMap.get("Quantity"));
+                        result.put(oneMap.get("ID"), oneMap.get("ID") + ";" + oneMap.get("Name") + ";" + oneMap.get("Price") + ";" + oneMap.get("Quantity"));
                     }
 
                     callback.onComplete(result);
@@ -162,6 +165,25 @@ public class Request {
                     toUpdate.put("`Processing`", "false");
                     HashMap<String,String> whereUpdate = new HashMap<String, String>();
                     whereUpdate.put("`ID`", String.valueOf(orderID));
+                    mysql.update("`Orders`", toUpdate, whereUpdate);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    public void setAllFinishOrder(final int tabelID) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    System.out.println("Database is getting ask");
+                    HashMap<String,String> toUpdate = new HashMap<String, String>();
+                    toUpdate.put("`Processing`", "false");
+                    HashMap<String,String> whereUpdate = new HashMap<String, String>();
+                    whereUpdate.put("`TabelID`", String.valueOf(tabelID));
                     mysql.update("`Orders`", toUpdate, whereUpdate);
 
                 } catch (Exception e) {

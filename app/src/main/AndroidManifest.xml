@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GastroAPPAfterCrash">
         <activity
+            android:name=".Abrechnung"
+            android:exported="false" />
+        <activity
             android:name=".Bestellen"
             android:exported="false" />
         <activity

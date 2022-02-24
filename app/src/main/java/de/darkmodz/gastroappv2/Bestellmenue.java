@@ -46,6 +46,9 @@ public class Bestellmenue extends AppCompatActivity {
             case "Bestellen":
                 toClass = Bestellen.class;
                 break;
+            case "Abrechnung":
+                toClass = Abrechnung.class;
+                break;
         }
 
         Intent switchActivityIntent = new Intent(this, toClass);
@@ -113,6 +116,14 @@ public class Bestellmenue extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 switchTo("Bestellen");
+            }
+        });
+
+        Button buttonAbrechnung = (Button) findViewById(R.id.buttonAbrechnung);
+        buttonAbrechnung.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switchTo("Abrechnung");
             }
         });
 
