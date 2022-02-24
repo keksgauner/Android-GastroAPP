@@ -179,7 +179,7 @@ public class Hauptspeise extends AppCompatActivity {
         /**
          * Handle zurück Button
          */
-        Button buttonZurueckVorspeise = (Button) findViewById(R.id.buttonNachspeise);
+        Button buttonZurueckVorspeise = (Button) findViewById(R.id.buttonZurueckHauptspeise);
         buttonZurueckVorspeise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
