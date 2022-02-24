@@ -153,6 +153,8 @@ public class Hauptspeise extends AppCompatActivity {
 
                 Bestellmenue.getInventory().add("Hauptspeise", splitted[0] + ";" + splitted[1] + ";" + splitted[2]);
                 Bestellmenue.getInventory().update();
+
+                MainActivity.setCostomColorClick(button, Color.BLACK, Color.GREEN);
             }
         });
     }
@@ -186,7 +188,7 @@ public class Hauptspeise extends AppCompatActivity {
         });
 
         /**
-         * Request Vorspeisen
+         * Request Product
          */
         new Request().getProducts("Hauptspeise", new RepositoryCallback<HashMap<String, String>>() {
             @Override

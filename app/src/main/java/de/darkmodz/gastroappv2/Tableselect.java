@@ -76,6 +76,7 @@ public class Tableselect extends AppCompatActivity {
                 Tischnummer = id;
                 Toast.makeText(getContext(), "Sie haben Tisch "+id+" Ausgewählt!",
                         Toast.LENGTH_SHORT).show();
+                MainActivity.setCostomColorClick(entry, Color.BLACK, Color.GREEN);
                 switchToBestellmenue();
             }
         });

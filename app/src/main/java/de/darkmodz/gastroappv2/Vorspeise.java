@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 import de.darkmodz.gastroapp.api.RepositoryCallback;
 import de.darkmodz.gastroapp.api.Request;
@@ -153,6 +154,8 @@ public class Vorspeise extends AppCompatActivity {
 
                 Bestellmenue.getInventory().add("Vorspeise", splitted[0] + ";" + splitted[1] + ";" + splitted[2]);
                 Bestellmenue.getInventory().update();
+
+                MainActivity.setCostomColorClick(button, Color.BLACK, Color.GREEN);
             }
         });
     }
@@ -186,7 +189,7 @@ public class Vorspeise extends AppCompatActivity {
         });
 
         /**
-         * Request Vorspeisen
+         * Request Product
          */
         new Request().getProducts("Vorspeise", new RepositoryCallback<HashMap<String, String>>() {
             @Override

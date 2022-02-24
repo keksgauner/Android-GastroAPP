@@ -198,6 +198,8 @@ public class Bestellen extends AppCompatActivity {
                 Toast.makeText(getContext(), ""+splitted[1]+" wurde aus der Liste gelöscht!",
                         Toast.LENGTH_SHORT).show();
 
+                MainActivity.setCostomColorClick(button, Color.BLACK, Color.RED);
+
                 Bestellmenue.getInventory().remove(catecory, position);
                 Bestellmenue.getInventory().update();
                 TextView gesamt = findViewById(R.id.textPreisBestellen);

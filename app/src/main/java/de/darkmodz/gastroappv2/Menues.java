@@ -152,6 +152,8 @@ public class Menues extends AppCompatActivity {
 
                 Bestellmenue.getInventory().add("Menues", splitted[0] + ";" + splitted[1] + ";" + splitted[2]);
                 Bestellmenue.getInventory().update();
+
+                MainActivity.setCostomColorClick(button, Color.BLACK, Color.GREEN);
             }
         });
     }
@@ -185,7 +187,7 @@ public class Menues extends AppCompatActivity {
         });
 
         /**
-         * Request Vorspeisen
+         * Request Product
          */
         new Request().getProducts("Menues", new RepositoryCallback<HashMap<String, String>>() {
             @Override

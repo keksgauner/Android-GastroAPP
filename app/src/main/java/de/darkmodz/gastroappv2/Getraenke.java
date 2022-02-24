@@ -152,6 +152,8 @@ public class Getraenke extends AppCompatActivity {
 
                 Bestellmenue.getInventory().add("Trinken", splitted[0] + ";" + splitted[1] + ";" + splitted[2]);
                 Bestellmenue.getInventory().update();
+
+                MainActivity.setCostomColorClick(button, Color.BLACK, Color.GREEN);
             }
         });
     }
@@ -185,7 +187,7 @@ public class Getraenke extends AppCompatActivity {
         });
 
         /**
-         * Request Vorspeisen
+         * Request Product
          */
         new Request().getProducts("Trinken", new RepositoryCallback<HashMap<String, String>>() {
             @Override

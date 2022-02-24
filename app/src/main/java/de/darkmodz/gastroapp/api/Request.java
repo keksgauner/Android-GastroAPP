@@ -64,7 +64,7 @@ public class Request {
                             "`Products`.`Weight`" +
                             "FROM `Products` " +
                             "LEFT JOIN `Type` ON `Type`.`Name` = '" + name +"' " +
-                            "WHERE `TypeID` = `Type`.`ID` ORDER BY `Products`.`Weight` ASC;");
+                            "WHERE `TypeID` = `Type`.`ID` AND `Products`.`Available` = true ORDER BY `Products`.`Weight` ASC;");
 
                     HashMap<String,String> result = new HashMap<>();
 

@@ -153,6 +153,8 @@ public class Nachspeise extends AppCompatActivity {
 
                 Bestellmenue.getInventory().add("Nachspeise", splitted[0] + ";" + splitted[1] + ";" + splitted[2]);
                 Bestellmenue.getInventory().update();
+
+                MainActivity.setCostomColorClick(button, Color.BLACK, Color.GREEN);
             }
         });
     }
@@ -186,7 +188,7 @@ public class Nachspeise extends AppCompatActivity {
         });
 
         /**
-         * Request Vorspeisen
+         * Request Product
          */
         new Request().getProducts("Nachspeise", new RepositoryCallback<HashMap<String, String>>() {
             @Override
