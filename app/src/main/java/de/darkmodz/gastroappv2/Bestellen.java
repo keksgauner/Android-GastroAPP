@@ -73,7 +73,7 @@ public class Bestellen extends AppCompatActivity {
          *  TextView Design festlegen
          */
         entry.setTextColor(Color.BLACK);
-        entry.setGravity(Gravity.CENTER);
+        entry.setGravity(Gravity.LEFT);
 
         /*
          * TextView konfiguration
@@ -200,6 +200,8 @@ public class Bestellen extends AppCompatActivity {
 
                 Bestellmenue.getInventory().remove(catecory, position);
                 Bestellmenue.getInventory().update();
+                TextView gesamt = findViewById(R.id.textPreisBestellen);
+                gesamt.setText("Es kostet " + Bestellmenue.getInventory().getCurrentPrize() + " Euro");
                 doReloadList();
             }
         });

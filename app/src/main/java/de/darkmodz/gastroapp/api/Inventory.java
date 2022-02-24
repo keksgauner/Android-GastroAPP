@@ -14,6 +14,7 @@ public class Inventory {
 
     public Inventory(TextView view) {
         this.view = view;
+        this.gesamtpreis = 0;
     }
 
     public HashMap<String, ArrayList<String>> getMap() {
@@ -35,6 +36,9 @@ public class Inventory {
     public void remove(String what, int position) {
         System.out.println("Inventory: Try to remove from position " + position);
         inventar.get(what).remove(position);
+        // Wenn die ArrayListe leer ist soll die Katekorie gelöscht werden
+        if(inventar.get(what).isEmpty())
+            inventar.remove(what);
     }
 
     public void update() {
