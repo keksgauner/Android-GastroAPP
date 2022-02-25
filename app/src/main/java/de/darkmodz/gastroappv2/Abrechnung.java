@@ -196,19 +196,24 @@ public class Abrechnung extends AppCompatActivity {
                             String[] splitted = result.get(vaule).split(";");
                             createButton(Integer.valueOf(splitted[0]), splitted);
                             gesamtpreis += Double.valueOf(splitted[2]);
-                            //System.out.println("Abrechnug: " + gesamtpreis + " mit " + splitted[2]);
+                            System.out.println("Abrechnug: " + gesamtpreis + " mit " + splitted[2]);
+
+                            preis(gesamtpreis);
                         }
                     });
                 }
 
-                gesamtpreis = Math.round(gesamtpreis*100);
-                gesamtpreis /= 100;
-                setText("Aktuell bei " + gesamtpreis + " Euro");
-                //System.out.println("Aktuell bei " + gesamtpreis + " Euro");
 
             }
         });
 
+    }
+
+    public void preis(double gesamtpreis2) {
+        gesamtpreis2 = Math.round(gesamtpreis2*100);
+        gesamtpreis2 /= 100;
+        setText("Aktuell bei " + gesamtpreis2 + " Euro");
+        System.out.println("Aktuell bei " + gesamtpreis2 + " Euro");
     }
 
     public void setText(String text) {

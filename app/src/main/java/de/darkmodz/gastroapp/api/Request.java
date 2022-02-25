@@ -173,10 +173,8 @@ public class Request {
                             "`Orders`.`Processing`," +
                             "`Orders`.`Timestamp`" +
                             "FROM `Orders` " +
-                            "LEFT JOIN `Type` ON `Type`.`TabelID` = '" + tabelID +"' " +
                             "LEFT JOIN `Products` ON `Products`.`ID` = `Orders`.`ProductID` " +
-                            "WHERE  `Products`.`ID` = `Orders`.`ProductID` " +
-                            "AND `Products`.`TypeID` = `Type`.`ID` " +
+                            "WHERE  `Orders`.`TabelID` = '" + tabelID +"' " +
                             "AND `Orders`.`Paid` = false " +
                             "AND `Processing` = true "  +
                             ";");
