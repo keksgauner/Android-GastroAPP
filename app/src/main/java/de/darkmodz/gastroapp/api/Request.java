@@ -197,7 +197,7 @@ public class Request {
         }).start();
     }
 
-    public void getCurrentOrders(final String name,final int tabelID final RepositoryCallback<HashMap<String,String>> callback) {
+    public void getCurrentOrders(final String name,final int tabelID, final RepositoryCallback<HashMap<String,String>> callback) {
         new Thread(new Runnable() {
             @Override
             public void run() {
