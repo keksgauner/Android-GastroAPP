@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import de.darkmodz.gastroapp.api.RepositoryCallback;
@@ -112,17 +113,43 @@ public class Tableselect extends AppCompatActivity {
                         Toast.makeText(getContext(), "Load Data...", Toast.LENGTH_SHORT).show();
                     }
                 });
-                for (String vaule : result.keySet()) {
+                ArrayList<String[]> sorted = sortArray(result);
+                for (String[] vaule : sorted) {
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
-                            String[] splitted = result.get(vaule).split(";");
-                            createButton(Integer.valueOf(splitted[0]), splitted[0]);
+                            createButton(Integer.valueOf(vaule[0]), vaule[0]);
                         }
                     });
                 }
             }
         });
 
+    }
+
+    // Buble sort
+    private ArrayList<String[]> sortArray(HashMap<String,String> map) {
+        ArrayList<String[]> array = new ArrayList<>();
+        // Hole mir alle Infos vom table
+        for (String vaule : map.keySet()) {
+            String[] splitted = map.get(vaule).split(";");
+            array.add(splitted);
+        }
+        // Sortiere die array
+        int vergleiche = 0;
+        // Die äußere Schleife läuft vom letzten Element immer eins weniger
+        for(int repeat = array.size() - 1; repeat > 0; repeat--) {
+            vergleiche++;
+            // Die innere Schleife läuft vom ersten bis zum repeat eintrag
+            for (int sort = 0; sort < repeat; sort++) {
+                if (Integer.valueOf(array.get(sort)[0]) > Integer.valueOf(array.get(sort + 1)[0])) {
+                    // Tausche die benachbarten Elemente
+                    String[] temp = array.get(sort);
+                    array.set(sort, array.get(sort + 1));
+                    array.set(sort + 1, temp);
+                }
+            }
+        }
+        return array;
     }
 }
