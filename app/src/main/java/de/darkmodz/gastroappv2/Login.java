@@ -44,25 +44,21 @@ public class Login extends AppCompatActivity {
                 new Request().validLogin(username, password, new RepositoryCallback<HashMap<String, String>>() {
                     @Override
                     public void onComplete(HashMap<String, String> result) {
+                        // Führe die Abfrage auf dem main thread aus
                         new Handler(Looper.getMainLooper()).post(new Runnable() {
                             @Override
                             public void run() {
-                                // Führe die Abfrage auf dem main thread aus
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        if (result.get("0") == "1") {
-                                            // Schreibe eine Toast-Meldung, dass der Login erfolgreich war
-                                            Toast.makeText(getApplicationContext(), "Login erfolgreich", Toast.LENGTH_SHORT).show();
-                                            new Request().setLogin(username, password);
-                                            // Zurück zur Hauptseite
-                                            finish();
-                                        } else {
-                                            // Schreibe eine Toast-Meldung, dass die Eingabe falsch war
-                                            Toast.makeText(getApplicationContext(), "Login fehlgeschlagen", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
+                                if (result.get("0") == "1") {
+                                    // Schreibe eine Toast-Meldung, dass der Login erfolgreich war
+                                    Toast.makeText(getApplicationContext(), "Login erfolgreich", Toast.LENGTH_SHORT).show();
+                                    new Request().setLogin(username, password);
+                                    MainActivity.setKellnerID(0);
+                                    // Zurück zur Hauptseite
+                                    finish();
+                                } else {
+                                    // Schreibe eine Toast-Meldung, dass die Eingabe falsch war
+                                    Toast.makeText(getApplicationContext(), "Login fehlgeschlagen", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         });
                     }

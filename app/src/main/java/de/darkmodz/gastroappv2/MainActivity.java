@@ -10,12 +10,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
+
+import de.darkmodz.gastroapp.api.Result;
 
 public class MainActivity extends AppCompatActivity {
 
     // Create a int with the kellnerID
-    private static int kellnerID = -1;
+    private static int kellnerID = new Integer(-1);
     public static void setKellnerID(int kellnerID) {
         MainActivity.kellnerID = kellnerID;
     }
@@ -79,11 +83,12 @@ public class MainActivity extends AppCompatActivity {
     // If the user is logged in, the button will be set to logout
     public void reloadLoginButton() {
         final Button btn_login = (Button) findViewById(R.id.btn_login);
-        if(MainActivity.getKellnerID() > 0) {
+        System.out.println("Reload THE Login Button");
+
+         if(MainActivity.getKellnerID() != -1)
             btn_login.setText("Logout");
-        } else {
-            btn_login.setText("Login");
-        }
+         else
+             btn_login.setText("Login");
     }
 
     /**
