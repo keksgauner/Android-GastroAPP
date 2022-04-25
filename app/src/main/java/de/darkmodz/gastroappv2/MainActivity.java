@@ -1,21 +1,27 @@
 package de.darkmodz.gastroappv2;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
     // Create a int with the kellnerID
-    public static int kellnerID;
+    private static int kellnerID = -1;
     public static void setKellnerID(int kellnerID) {
         MainActivity.kellnerID = kellnerID;
+    }
+    // getKelderID
+    public static int getKellnerID() {
+        return kellnerID;
     }
 
     @Override
@@ -43,23 +49,54 @@ public class MainActivity extends AppCompatActivity {
 
         // Implementierung der EventListener für die Button btn_login
         final Button btn_login = (Button) findViewById(R.id.btn_login);
+        reloadLoginButton();
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switchToLogin();
+
+                if(MainActivity.getKellnerID() > 0) {
+                    setKellnerID(-1);
+                    reloadLoginButton();
+                    // Erstelle eine Toast-Meldung und zeige diese an, dass erfolgreich ausgeloggt wurde
+                    Toast.makeText(getApplicationContext(), "Erfolgreich ausgeloggt", Toast.LENGTH_SHORT).show();
+                } else {
+                    switchToLogin();
+                }
             }
         });
     }
 
+    // If Login finished on LoginActivity reload the login button
+    @Override
+    protected void onResume() {
+        super.onResume();
+        reloadLoginButton();
+    }
 
     /**
-     * @customMethoden
+     * Reload the Button out of the MainActivity
+     */
+    // If the user is logged in, the button will be set to logout
+    public void reloadLoginButton() {
+        final Button btn_login = (Button) findViewById(R.id.btn_login);
+        if(MainActivity.getKellnerID() > 0) {
+            btn_login.setText("Logout");
+        } else {
+            btn_login.setText("Login");
+        }
+    }
+
+    /**
+     * Methode zum Wechseln zur Tischauswahl
      */
     private void switchToTableselect() {
         Intent switchActivityIntent = new Intent(this, Tableselect.class);
         startActivity(switchActivityIntent);
     }
 
+    /**
+     * Switch to the LoginActivity
+     */
     private void switchToLogin() {
         Intent switchActivityIntent = new Intent(this, Login.class);
         startActivity(switchActivityIntent);

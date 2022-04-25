@@ -55,7 +55,7 @@ public class Login extends AppCompatActivity {
                                             // Schreibe eine Toast-Meldung, dass der Login erfolgreich war
                                             Toast.makeText(getApplicationContext(), "Login erfolgreich", Toast.LENGTH_SHORT).show();
                                             new Request().setLogin(username, password);
-                                            System.out.println(MainActivity.kellnerID);
+                                            // Zurück zur Hauptseite
                                             finish();
                                         } else {
                                             // Schreibe eine Toast-Meldung, dass die Eingabe falsch war

@@ -60,9 +60,7 @@ public class Request {
                             "WHERE `Name` = '"+mysql.validation(username)+"'" +
                             "AND `Password` = '"+mysql.validation(password)+"'" +
                             ";");
-                    HashMap<String,String> result = new HashMap<>();
-                    System.out.println(result);
-                    MainActivity.setKellnerID(Integer.valueOf(result.get("ID")));
+                    MainActivity.setKellnerID(Integer.valueOf(results.getData().get(0).get("ID")));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

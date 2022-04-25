@@ -224,7 +224,7 @@ public class MySQL extends Activity {
     }
 
     public String validation(String data) {
-        //data.replace("'", "\'");
+        data.replace("'", "\'");
 
         return data;
     }
