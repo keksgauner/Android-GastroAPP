@@ -120,6 +120,8 @@ public class Bestellmenue extends AppCompatActivity {
         });
 
         Button buttonAbrechnung = (Button) findViewById(R.id.buttonAbrechnung);
+        buttonAbrechnung.setVisibility(View.INVISIBLE);
+        if(MainActivity.getKellnerID() > 0)buttonAbrechnung.setVisibility(View.VISIBLE);
         buttonAbrechnung.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

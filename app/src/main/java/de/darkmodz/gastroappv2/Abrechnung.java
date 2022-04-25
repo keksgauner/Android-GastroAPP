@@ -160,8 +160,9 @@ public class Abrechnung extends AppCompatActivity {
                 // Update after a second
                 try {
                     tableLayout.removeAllViews();
-                    TimeUnit.SECONDS.sleep(3);
-                } catch (InterruptedException e) {
+                    // Refresh the Activity
+                    context.recreate();
+                } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
                     update();

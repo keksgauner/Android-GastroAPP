@@ -250,7 +250,7 @@ public class Bestellen extends AppCompatActivity {
         submit.setOnClickListener(view -> {
             if(!Bestellmenue.getInventory().getMap().isEmpty()) {
                 Toast.makeText(getContext(), "Bestellung wurde gesendet.", Toast.LENGTH_SHORT).show();
-                Bestellmenue.getInventory().absenden(0, Tableselect.getTischnummer());
+                Bestellmenue.getInventory().absenden(MainActivity.getKellnerID(), Tableselect.getTischnummer());
                 finish();
             } else
                 Toast.makeText(getContext(), "Bestellung konnte nicht gesendet werden!", Toast.LENGTH_SHORT).show();

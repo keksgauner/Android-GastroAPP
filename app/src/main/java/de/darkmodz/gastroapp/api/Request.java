@@ -143,7 +143,7 @@ public class Request {
                     System.out.println("Database is getting ask");
                     HashMap<String,String> map = new HashMap<String, String>();
                     // `AccountID`, `TabelID`, `ProductID`, `Quantity`, `Paid`, `Processing`, `Timestamp`
-                    if(accountID != 0)
+                    if(accountID != -1)
                         map.put("`AccountID`", String.valueOf(accountID));
                     else
                         map.put("`AccountID`", null);

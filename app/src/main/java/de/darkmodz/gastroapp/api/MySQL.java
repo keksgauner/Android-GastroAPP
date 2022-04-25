@@ -224,8 +224,10 @@ public class MySQL extends Activity {
     }
 
     public String validation(String data) {
-        data.replace("'", "\'");
-
+        data = data.replaceAll("'", "-");
+        data = data.replaceAll(String.valueOf("\\"), "-");
+        // https://regex101.com/
+        // https://www.dotsource.de/labs/wp-content/uploads/sites/4/2019/01/Projektarbeit_XSS-CSRF-SQL-Injection.pdf
         return data;
     }
 
