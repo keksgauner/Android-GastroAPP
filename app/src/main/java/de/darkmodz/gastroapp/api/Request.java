@@ -3,6 +3,8 @@ package de.darkmodz.gastroapp.api;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import de.darkmodz.gastroappv2.MainActivity;
+
 // request muss asyncron sein sonst gibt es ein NetworkOnMainThreadException
 // deshalb muss es im Background abgespielt werden
 
@@ -15,6 +17,57 @@ public class Request {
     public Request() {
         // Setze Datenbank Daten
         mysql = new MySQL("85.14.222.246", "3306", "GastroApp","7LEErmZJAe6c16S[", "GastroApp");
+    }
+
+    public void validLogin(final String username, final String password, final RepositoryCallback<HashMap<String,String>> callback) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    System.out.println("Database is getting ask");
+                    Result.Feedback<ArrayList<HashMap<String,String>>> results = mysql.size("SELECT " +
+                            "* " +
+                            "FROM `Accounts` " +
+                            "WHERE `Name` = '"+mysql.validation(username)+"'" +
+                            "AND `Password` = '"+mysql.validation(password)+"'" +
+                            ";");
+
+                    HashMap<String,String> result = new HashMap<>();
+
+                    if(Integer.valueOf(results.getData().get(0).get("0")) > 0)
+                        result.put("0", "1");
+                    else
+                        result.put("0", "0");
+
+                    callback.onComplete(result);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    callback.onComplete(null);
+                }
+            }
+        }).start();
+    }
+
+    public void setLogin(final String username, final String password) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    System.out.println("Database is getting ask");
+                    Result.Feedback<ArrayList<HashMap<String,String>>> results = mysql.query("SELECT " +
+                            "* " +
+                            "FROM `Accounts` " +
+                            "WHERE `Name` = '"+mysql.validation(username)+"'" +
+                            "AND `Password` = '"+mysql.validation(password)+"'" +
+                            ";");
+                    HashMap<String,String> result = new HashMap<>();
+                    System.out.println(result);
+                    MainActivity.setKellnerID(Integer.valueOf(result.get("ID")));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     public void getTables(final RepositoryCallback<HashMap<String,String>> callback) {

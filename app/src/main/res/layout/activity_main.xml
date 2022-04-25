@@ -43,4 +43,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iV_homeLogo" />
 
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="138dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginBottom="144dp"
+        android:text="Login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

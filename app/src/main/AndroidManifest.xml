@@ -12,6 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GastroAPPAfterCrash">
         <activity
+            android:name=".Login"
+            android:exported="false"
+            android:label="@string/title_activity_login"
+            android:theme="@style/Theme.GastroAPPAfterCrash.NoActionBar" />
+        <activity
             android:name=".Abrechnung"
             android:exported="false" />
         <activity

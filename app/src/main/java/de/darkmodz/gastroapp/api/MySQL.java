@@ -86,6 +86,41 @@ public class MySQL extends Activity {
         }
     }
 
+    public Result.Feedback<ArrayList<HashMap<String,String>>> size(String code) {
+        try {
+            Result.Feedback<Connection> connection = createConnection();
+
+            // Statement mit Benennung der Tablle
+            Statement stmt = connection.getData().createStatement();
+            // Fülle ResultSet
+            ResultSet result = stmt.executeQuery(code);
+
+            // Muss leider die selbe syntax wie oben, da es sonst nicht funktioniert
+            ArrayList<HashMap<String,String>> entries = new ArrayList<HashMap<String,String>>();
+
+            HashMap<String, String> addArray = new HashMap<String, String>();
+            int entriesSize = 0;
+            while (result.next()) {
+                entriesSize++;
+            }
+            addArray.put("0", entriesSize + "");
+            if(addArray == null)
+                System.out.println("Database can't handle this!");
+            else
+                entries.add(addArray);
+
+            // Ich schließe die Streams wieder und gebe die Tabelle wieder frei.
+            stmt.close();
+            result.close();
+            connection.getData().close();
+            return new Result.Feedback<ArrayList<HashMap<String,String>>>(entries);
+        } catch (SQLException e) {
+            System.out.println("SQL Fehler: " + e.getLocalizedMessage());
+            e.printStackTrace();
+            return new Result.Feedback<ArrayList<HashMap<String,String>>>(null);
+        }
+    }
+
     public void insert(String tableName, HashMap<String, String> row_arrays) {
         try {
             System.out.println("Database get insert request");
@@ -189,7 +224,7 @@ public class MySQL extends Activity {
     }
 
     public String validation(String data) {
-        data.replace("'", "\'");
+        //data.replace("'", "\'");
 
         return data;
     }

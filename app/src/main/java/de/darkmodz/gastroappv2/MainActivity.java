@@ -1,8 +1,6 @@
 package de.darkmodz.gastroappv2;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,9 +10,13 @@ import android.widget.TextView;
 
 import java.util.concurrent.TimeUnit;
 
-import de.darkmodz.gastroapp.api.Inventory;
-
 public class MainActivity extends AppCompatActivity {
+
+    // Create a int with the kellnerID
+    public static int kellnerID;
+    public static void setKellnerID(int kellnerID) {
+        MainActivity.kellnerID = kellnerID;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +40,28 @@ public class MainActivity extends AppCompatActivity {
                 switchToTableselect();
             }
         });
+
+        // Implementierung der EventListener für die Button btn_login
+        final Button btn_login = (Button) findViewById(R.id.btn_login);
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switchToLogin();
+            }
+        });
     }
+
 
     /**
      * @customMethoden
      */
     private void switchToTableselect() {
         Intent switchActivityIntent = new Intent(this, Tableselect.class);
+        startActivity(switchActivityIntent);
+    }
+
+    private void switchToLogin() {
+        Intent switchActivityIntent = new Intent(this, Login.class);
         startActivity(switchActivityIntent);
     }
 
