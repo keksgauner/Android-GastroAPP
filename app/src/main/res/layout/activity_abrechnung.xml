@@ -8,8 +8,8 @@
 
     <ScrollView
         android:id="@+id/bestellenScrollView"
-        android:layout_width="417dp"
-        android:layout_height="596dp"
+        android:layout_width="409dp"
+        android:layout_height="296dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -35,27 +35,64 @@
         android:id="@+id/textAbrechnung"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/buttonAbrechnungSave"
+        app:layout_constraintEnd_toStartOf="@+id/buttonAbrechnungFinihed"
+        app:layout_constraintHorizontal_bias="0.181"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textAbrechnung2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAbrechnungFinihed"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ScrollView
+        android:id="@+id/bestellenScrollView2"
+        android:layout_width="410dp"
+        android:layout_height="299dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bestellenScrollView" />
+        app:layout_constraintTop_toBottomOf="@+id/bestellenScrollView"
+        tools:ignore="SpeakableTextPresentCheck">
+
+        <LinearLayout
+            android:id="@+id/bestellenLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TableLayout
+                android:id="@+id/abrechnungTableInvoices2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/buttonAbrechnungSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="So Speichern"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAbrechnungFinihed"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bestellenScrollView" />
+        android:text="Zurück"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/buttonAbrechnungFinihed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="231dp"
+        android:layout_height="48dp"
         android:text="Alles Bezahlt"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAbrechnungSave"
         app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>

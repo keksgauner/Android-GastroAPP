@@ -74,12 +74,23 @@ public class Request {
             public void run() {
                 try {
                     System.out.println("Database is getting ask");
-                    Result.Feedback<ArrayList<HashMap<String,String>>> results = mysql.query("SELECT " +
-                            "`Tables`.`ID`, " +
-                            "`Tables`.`Nummer`, " +
-                            "`Tables`.`Ort` " +
-                            "FROM `Tables` " +
-                            "WHERE 1 ORDER BY `Tables`.`ID` ASC;");
+                    Result.Feedback<ArrayList<HashMap<String,String>>> results;
+
+                    if(MainActivity.getKellnerID() == -1)
+                        results = mysql.query("SELECT " +
+                                "`Tables`.`ID`, " +
+                                "`Tables`.`Nummer`, " +
+                                "`Tables`.`Ort` " +
+                                "FROM `Tables` " +
+                                "WHERE 1 ORDER BY `Tables`.`ID` ASC;");
+                    else
+                        results = mysql.query("SELECT " +
+                                "`Tables`.`ID`, " +
+                                "`Tables`.`Nummer`, " +
+                                "`Tables`.`Ort` " +
+                                "FROM `Tables` " +
+                                "WHERE 1 ORDER BY `Tables`.`ID` ASC;");
+
 
                     HashMap<String,String> result = new HashMap<>();
 

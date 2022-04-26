@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
+import de.darkmodz.gastroapp.api.Inventory;
 import de.darkmodz.gastroapp.api.RepositoryCallback;
 import de.darkmodz.gastroapp.api.Request;
 
@@ -25,8 +26,11 @@ public class Abrechnung extends AppCompatActivity {
     /**
      * Globalvariablen
      */
+    private static Inventory inventory;
+
     private Abrechnung context;
     private TableLayout tableLayout;
+    private TableLayout tableLayout2;
     private double gesamtpreis;
 
     /**
@@ -35,9 +39,12 @@ public class Abrechnung extends AppCompatActivity {
     public Abrechnung getContext() {
         return context;
     }
+    public static Inventory getInventory() {
+        return inventory;
+    }
 
-    public Button createNewButton(){
-        /*
+    public Button createNewButton(String text){
+        /**
          *  Button erstellen und positionieren
          */
         Button entry = new Button(getContext());
@@ -47,22 +54,22 @@ public class Abrechnung extends AppCompatActivity {
         layoutParams.weight = 5;
         entry.setLayoutParams(layoutParams);
 
-        /*
+        /**
          *  Button Design festlegen
          */
         entry.setTextColor(Color.WHITE);
         entry.setBackgroundColor(Color.BLACK);
         entry.setGravity(Gravity.CENTER);
 
-        /*
+        /**
          * Button konfiguration
          */
-        entry.setText("Bezahlt");
+        entry.setText(text);
         return entry;
     }
 
     public TextView createNewTextView(String[] splitted){
-        /*
+        /**
          *  TextView erstellen und positionieren
          */
         TextView entry = new TextView(getContext());
@@ -85,8 +92,9 @@ public class Abrechnung extends AppCompatActivity {
         return entry;
     }
 
+
     public TableRow createNewTableRow(){
-        /*
+        /**
          *  TableRow erstellen und positionieren
          */
         TableRow entry = new TableRow(getContext());
@@ -95,7 +103,7 @@ public class Abrechnung extends AppCompatActivity {
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams((int) pixelsWidth, (int) pixelsHeight);
         entry.setLayoutParams(layoutParams);
 
-        /*
+        /**
          * TableRow konfiguration
          */
 
@@ -103,7 +111,7 @@ public class Abrechnung extends AppCompatActivity {
     }
 
     public View createNewView(){
-        /*
+        /**
          *  View erstellen und positionieren
          */
         View entry = new View(getContext());
@@ -113,7 +121,7 @@ public class Abrechnung extends AppCompatActivity {
         layoutParams.setMargins(0,10,0,10);
         entry.setLayoutParams(layoutParams);
 
-        /*
+        /**
          * View konfiguration
          */
         entry.setBackgroundColor(Color.BLACK);
@@ -123,25 +131,25 @@ public class Abrechnung extends AppCompatActivity {
 
     public void createButton(int id, String[] splitted){
 
-        /*
+        /**
          * Erstelle ein TableRow um zwei Objekte nebeneinander zu bekommen
          */
         final TableRow tableRow = createNewTableRow();
 
-        /*
+        /**
          * Erstelle ein neuen Button, Text und View
          */
-        Button button = createNewButton();
+        Button button = createNewButton("Add");
         TextView textView = createNewTextView(splitted);
         View view = createNewView();
 
-        /*
+        /**
          * Button und Text zum TableRow Hinzufügen
          */
         tableRow.addView(textView);
         tableRow.addView(button);
 
-        /*
+        /**
          * View und TableRow zum eigentlichen Layout hinzufügen
          */
         tableLayout.addView(tableRow);
@@ -150,9 +158,19 @@ public class Abrechnung extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), ""+splitted[1]+" ist Bezahlt.",
+                Toast.makeText(getContext(), ""+splitted[1]+" wurde hinzugefügt.",
                         Toast.LENGTH_SHORT).show();
 
+                // Aus der Tabelle löschen
+                tableLayout.removeView(tableRow);
+
+                getInventory().add("Rechnung", splitted[0] + ";" + splitted[1] + ";" + splitted[2]);
+                getInventory().update();
+                TextView gesamt = findViewById(R.id.textAbrechnung2);
+                gesamt.setText("Es kostet " + getInventory().getCurrentPrize() + " Euro");
+                doReloadList();
+
+                /*
                 new Request().setFinishOrder(Integer.valueOf(splitted[0]));
 
                 tableLayout.removeView(tableRow);
@@ -167,7 +185,49 @@ public class Abrechnung extends AppCompatActivity {
                 } finally {
                     update();
                 }
+                */
 
+            }
+        });
+    }
+
+    public void createButton(String catecory, String[] splitted, int position){
+
+        /*
+         * Erstelle ein TableRow um zwei Objekte nebeneinander zu bekommen
+         */
+        final TableRow tableRow = createNewTableRow();
+
+        /*
+         * Erstelle ein neuen Button, Text und View
+         */
+        Button button = createNewButton("Remove");
+        TextView textView = createNewTextView(splitted);
+        View view = createNewView();
+
+        /*
+         * Button und Text zum TableRow Hinzufügen
+         */
+        tableRow.addView(textView);
+        tableRow.addView(button);
+
+        /*
+         * View und TableRow zum eigentlichen Layout hinzufügen
+         */
+        tableLayout2.addView(tableRow);
+        tableLayout2.addView(view);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), ""+splitted[1]+" wurde aus der Liste gelöscht!",
+                        Toast.LENGTH_SHORT).show();
+
+                getInventory().remove(catecory, position);
+                getInventory().update();
+                TextView gesamt = findViewById(R.id.textPreisBestellen);
+                gesamt.setText("Es kostet " + getInventory().getCurrentPrize() + " Euro");
+                doReloadList();
             }
         });
     }
@@ -228,6 +288,97 @@ public class Abrechnung extends AppCompatActivity {
 
     }
 
+    public void createCatecory(String catecory){
+
+        /*
+         * Erstelle ein TableRow um zwei Objekte nebeneinander zu bekommen
+         */
+        final TableRow tableRow = createNewTableRow();
+
+        /*
+         * Erstelle ein neuen Button, Text und View
+         */
+        TextView textView = createNewTextView(catecory);
+        View view = createNewView();
+
+        /*
+         * Button und Text zum TableRow Hinzufügen
+         */
+        tableRow.addView(textView);
+
+        /*
+         * View und TableRow zum eigentlichen Layout hinzufügen
+         */
+        tableLayout.addView(tableRow);
+        tableLayout.addView(view);
+    }
+
+    public TextView createNewTextView(String text){
+        /*
+         *  TextView erstellen und positionieren
+         */
+        TextView entry = new TextView(getContext());
+        TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(10,40,0,0);
+        layoutParams.gravity = Gravity.LEFT;
+        layoutParams.weight = 1;
+        entry.setLayoutParams(layoutParams);
+
+        /*
+         *  TextView Design festlegen
+         */
+        entry.setTextColor(Color.BLACK);
+        entry.setGravity(Gravity.LEFT);
+
+        /*
+         * TextView konfiguration
+         */
+        entry.setText(text);
+        return entry;
+    }
+
+    public void createCatecory(String[] catecory){
+
+        /*
+         * Erstelle ein TableRow um zwei Objekte nebeneinander zu bekommen
+         */
+        final TableRow tableRow = createNewTableRow();
+
+        /*
+         * Erstelle ein neuen Button, Text und View
+         */
+        TextView textView = createNewTextView(catecory);
+        View view = createNewView();
+
+        /*
+         * Button und Text zum TableRow Hinzufügen
+         */
+        tableRow.addView(textView);
+
+        /*
+         * View und TableRow zum eigentlichen Layout hinzufügen
+         */
+        tableLayout2.addView(tableRow);
+        tableLayout2.addView(view);
+    }
+
+    public void doReloadList() {
+        tableLayout2.removeAllViews();
+
+        /**
+         * Request Delete
+         */
+        for (String vaule : getInventory().getMap().keySet()) {
+            createCatecory(vaule);
+            for (int i=0; i < getInventory().getMap().get(vaule).size(); i++) {
+                String[] splitted = getInventory().getMap().get(vaule).get(i).split(";");
+                createButton(vaule, splitted, i);
+            }
+            TextView gesamt = findViewById(R.id.textAbrechnung2);
+            gesamt.setText("Es kostet " + getInventory().getCurrentPrize() + " Euro");
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -238,12 +389,14 @@ public class Abrechnung extends AppCompatActivity {
          * Nutzerelemente hinzufügen
          */
         tableLayout = (TableLayout) findViewById(R.id.abrechnungTableInvoices);
+        tableLayout2 = (TableLayout) findViewById(R.id.abrechnungTableInvoices2);
 
 
         /**
          * Variablen initialisieren
          */
         context = this;
+        inventory = new Inventory(findViewById(R.id.textAbrechnung2));
 
         /**
          * Handle finish all
