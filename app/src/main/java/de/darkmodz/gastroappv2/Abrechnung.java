@@ -173,10 +173,6 @@ public class Abrechnung extends AppCompatActivity {
                     getInventory().update();
                     getInventory2().update();
 
-                    TextView gesamt = findViewById(R.id.textAbrechnung);
-                    gesamt.setText("Es kostet " + getInventory().getCurrentPrize() + " Euro");
-                    TextView gesamt2 = findViewById(R.id.textAbrechnung2);
-                    gesamt2.setText("Es kostet " + getInventory2().getCurrentPrize() + " Euro");
                     doReloadList();
                     doReloadList2();
                 }
@@ -190,10 +186,6 @@ public class Abrechnung extends AppCompatActivity {
                     getInventory().update();
                     getInventory2().update();
 
-                    TextView gesamt = findViewById(R.id.textAbrechnung);
-                    gesamt.setText("Es kostet " + getInventory().getCurrentPrize() + " Euro");
-                    TextView gesamt2 = findViewById(R.id.textAbrechnung2);
-                    gesamt2.setText("Es kostet " + getInventory2().getCurrentPrize() + " Euro");
                     doReloadList();
                     doReloadList2();
                  }
@@ -240,18 +232,18 @@ public class Abrechnung extends AppCompatActivity {
 
     }
 
-    public void preis(double gesamtpreis2) {
-        gesamtpreis2 = Math.round(gesamtpreis2*100);
-        gesamtpreis2 /= 100;
-        setText("Aktuell bei " + gesamtpreis2 + " Euro");
-        System.out.println("Aktuell bei " + gesamtpreis2 + " Euro");
+    public void preis(double gesamtpreis) {
+        gesamtpreis = Math.round(gesamtpreis*100);
+        gesamtpreis /= 100;
+        setText("Aktuell bei " + gesamtpreis + " Euro");
+        System.out.println("Aktuell bei " + gesamtpreis + " Euro");
     }
 
     public void setText(String text) {
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
-                TextView feedback = findViewById(R.id.textAbrechnung);
+                TextView feedback = findViewById(R.id.textAbrechnung2);
                 feedback.setText(text);
             }
         });
