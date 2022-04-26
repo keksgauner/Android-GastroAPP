@@ -87,9 +87,21 @@ public class Request {
                         results = mysql.query("SELECT " +
                                 "`Tables`.`ID`, " +
                                 "`Tables`.`Nummer`, " +
-                                "`Tables`.`Ort` " +
+                                "`reservation`.`Date`, " +
+                                "`reservation`.`Time` " +
                                 "FROM `Tables` " +
-                                "WHERE 1 ORDER BY `Tables`.`ID` ASC;");
+                                "LEFT JOIN `reservation` ON `reservation`.`TableID` = `Tables`.`ID`" +
+                                "WHERE " +
+                                "`reservation`.`Date` <> DATE(NOW()) " +
+                                "OR `reservation`.`Date` IS NULL " +
+                                "AND " +
+                                "`reservation`.`Time` " +
+                                "NOT BETWEEN TIME(NOW()) " +
+                                "AND " +
+                                "TIME(DATE_ADD(NOW(), INTERVAL 2 HOUR)) " +
+                                "OR `reservation`.`Time` IS NULL" +
+                                "ORDER BY `Tables`.`Nummer` ASC;");
+                    //ORDER BY `Tables`.`Nummer` ASC;
 
 
                     HashMap<String,String> result = new HashMap<>();

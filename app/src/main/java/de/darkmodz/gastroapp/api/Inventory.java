@@ -80,7 +80,7 @@ public class Inventory {
                 String[] splitted = inventar.get(vaule).get(i).split(";");
                 System.out.println("Database send insert request");
 
-                new Request().setFinishOrder(Integer.valueOf(splitted[0]));
+                //new Request().setFinishOrder(Integer.valueOf(splitted[0]));
 
             }
         }
