@@ -77,20 +77,15 @@ public class Request {
                     Result.Feedback<ArrayList<HashMap<String,String>>> results;
 
                     if(MainActivity.getKellnerID() == -1)
+
                         results = mysql.query("SELECT " +
                                 "`Tables`.`ID`, " +
                                 "`Tables`.`Nummer`, " +
-                                "`Tables`.`Ort` " +
-                                "FROM `Tables` " +
-                                "WHERE 1 ORDER BY `Tables`.`ID` ASC;");
-                    else
-                        results = mysql.query("SELECT " +
-                                "`Tables`.`ID`, " +
-                                "`Tables`.`Nummer`, " +
+                                "`Tables`.`Ort`, " +
                                 "`reservation`.`Date`, " +
                                 "`reservation`.`Time` " +
                                 "FROM `Tables` " +
-                                "LEFT JOIN `reservation` ON `reservation`.`TableID` = `Tables`.`ID`" +
+                                "LEFT JOIN `reservation` ON `reservation`.`TableID` = `Tables`.`ID` AND `reservation`.`Date` = DATE(NOW()) " +
                                 "WHERE " +
                                 "`reservation`.`Date` <> DATE(NOW()) " +
                                 "OR `reservation`.`Date` IS NULL " +
@@ -99,10 +94,15 @@ public class Request {
                                 "NOT BETWEEN TIME(NOW()) " +
                                 "AND " +
                                 "TIME(DATE_ADD(NOW(), INTERVAL 2 HOUR)) " +
-                                "OR `reservation`.`Time` IS NULL" +
+                                "OR `reservation`.`Time` IS NULL " +
                                 "ORDER BY `Tables`.`Nummer` ASC;");
-                    //ORDER BY `Tables`.`Nummer` ASC;
-
+                    else
+                        results = mysql.query("SELECT " +
+                                "`Tables`.`ID`, " +
+                                "`Tables`.`Nummer`, " +
+                                "`Tables`.`Ort` " +
+                                "FROM `Tables` " +
+                                "WHERE 1 ORDER BY `Tables`.`ID` ASC;");
 
                     HashMap<String,String> result = new HashMap<>();
 
