@@ -7,22 +7,23 @@
     tools:context=".Abrechnung">
 
     <ScrollView
-        android:id="@+id/bestellenScrollView"
+        android:id="@+id/bestellenScrollView2"
         android:layout_width="409dp"
         android:layout_height="296dp"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAbrechnungSave"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck">
 
         <LinearLayout
-            android:id="@+id/abrechnungLayout"
+            android:id="@+id/abrechnungLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TableLayout
-                android:id="@+id/abrechnungTableInvoices"
+                android:id="@+id/abrechnungTableInvoices2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -35,43 +36,41 @@
         android:id="@+id/textAbrechnung"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAbrechnungSave"
         app:layout_constraintEnd_toStartOf="@+id/buttonAbrechnungFinihed"
-        app:layout_constraintHorizontal_bias="0.181"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.132"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bestellenScrollView" />
 
     <TextView
         android:id="@+id/textAbrechnung2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_marginStart="16dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAbrechnungFinihed"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/buttonAbrechnungSave"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bestellenScrollView2" />
 
     <ScrollView
-        android:id="@+id/bestellenScrollView2"
+        android:id="@+id/bestellenScrollView"
         android:layout_width="410dp"
-        android:layout_height="299dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="264dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bestellenScrollView"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck">
 
         <LinearLayout
-            android:id="@+id/bestellenLayout2"
+            android:id="@+id/bestellenLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TableLayout
-                android:id="@+id/abrechnungTableInvoices2"
+                android:id="@+id/abrechnungTableInvoices"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -92,7 +91,22 @@
         android:id="@+id/buttonAbrechnungFinihed"
         android:layout_width="231dp"
         android:layout_height="48dp"
-        android:text="Alles Bezahlt"
+        android:layout_marginTop="4dp"
+        android:text="Oberes Bezahlen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bestellenScrollView" />
+
+    <Button
+        android:id="@+id/buttonAbrechnungFinihed2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Unteres Bezahlen"
         app:layout_constraintBottom_toTopOf="@+id/buttonAbrechnungSave"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.917"
+        app:layout_constraintStart_toEndOf="@+id/textAbrechnung2"
+        app:layout_constraintTop_toBottomOf="@+id/bestellenScrollView2"
+        app:layout_constraintVertical_bias="1.0" />
 </android.support.constraint.ConstraintLayout>

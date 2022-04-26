@@ -73,6 +73,7 @@ public class Inventory {
         inventar.clear();
         update();
     }
+
     public void finished() {
         for (String vaule : inventar.keySet()) {
             for (int i=0; i < inventar.get(vaule).size(); i++) {

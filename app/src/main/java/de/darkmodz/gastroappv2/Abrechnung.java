@@ -27,6 +27,7 @@ public class Abrechnung extends AppCompatActivity {
      * Globalvariablen
      */
     private static Inventory inventory;
+    private static Inventory inventory2;
 
     private Abrechnung context;
     private TableLayout tableLayout;
@@ -41,6 +42,9 @@ public class Abrechnung extends AppCompatActivity {
     }
     public static Inventory getInventory() {
         return inventory;
+    }
+    public static Inventory getInventory2() {
+        return inventory2;
     }
 
     public Button createNewButton(String text){
@@ -129,105 +133,70 @@ public class Abrechnung extends AppCompatActivity {
         return entry;
     }
 
-    public void createButton(int id, String[] splitted){
+    public void createButton(String catecory, String[] splitted, int position, TableLayout tableLayout3){
 
-        /**
+        /*
          * Erstelle ein TableRow um zwei Objekte nebeneinander zu bekommen
          */
         final TableRow tableRow = createNewTableRow();
 
-        /**
+        /*
          * Erstelle ein neuen Button, Text und View
          */
-        Button button = createNewButton("Add");
+        Button button = createNewButton("Move");
         TextView textView = createNewTextView(splitted);
         View view = createNewView();
 
-        /**
+        /*
          * Button und Text zum TableRow Hinzufügen
          */
         tableRow.addView(textView);
         tableRow.addView(button);
 
-        /**
+        /*
          * View und TableRow zum eigentlichen Layout hinzufügen
          */
-        tableLayout.addView(tableRow);
-        tableLayout.addView(view);
+        tableLayout3.addView(tableRow);
+        tableLayout3.addView(view);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), ""+splitted[1]+" wurde hinzugefügt.",
+                Toast.makeText(getContext(), ""+splitted[1]+" wurde gemoved!",
                         Toast.LENGTH_SHORT).show();
 
-                // Aus der Tabelle löschen
-                tableLayout.removeView(tableRow);
+                if(tableLayout3 == tableLayout2){
+                    getInventory().add(catecory, getInventory2().getMap().get(catecory).get(position));
+                    getInventory2().remove(catecory, position);
 
-                getInventory().add("Rechnung", splitted[0] + ";" + splitted[1] + ";" + splitted[2]);
-                getInventory().update();
-                TextView gesamt = findViewById(R.id.textAbrechnung2);
-                gesamt.setText("Es kostet " + getInventory().getCurrentPrize() + " Euro");
-                doReloadList();
+                    // Reload ALL
+                    getInventory().update();
+                    getInventory2().update();
 
-                /*
-                new Request().setFinishOrder(Integer.valueOf(splitted[0]));
-
-                tableLayout.removeView(tableRow);
-
-                // Update after a second
-                try {
-                    tableLayout.removeAllViews();
-                    // Refresh the Activity
-                    context.recreate();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    update();
+                    TextView gesamt = findViewById(R.id.textAbrechnung);
+                    gesamt.setText("Es kostet " + getInventory().getCurrentPrize() + " Euro");
+                    TextView gesamt2 = findViewById(R.id.textAbrechnung2);
+                    gesamt2.setText("Es kostet " + getInventory2().getCurrentPrize() + " Euro");
+                    doReloadList();
+                    doReloadList2();
                 }
-                */
+                if(tableLayout3 == tableLayout){
+                    // Aus der Tabelle löschen
+                    tableLayout.removeView(tableRow);
+                    getInventory2().add(catecory, getInventory().getMap().get(catecory).get(position));
+                    getInventory().remove(catecory, position);
 
-            }
-        });
-    }
+                    // Reload ALL
+                    getInventory().update();
+                    getInventory2().update();
 
-    public void createButton(String catecory, String[] splitted, int position){
-
-        /*
-         * Erstelle ein TableRow um zwei Objekte nebeneinander zu bekommen
-         */
-        final TableRow tableRow = createNewTableRow();
-
-        /*
-         * Erstelle ein neuen Button, Text und View
-         */
-        Button button = createNewButton("Remove");
-        TextView textView = createNewTextView(splitted);
-        View view = createNewView();
-
-        /*
-         * Button und Text zum TableRow Hinzufügen
-         */
-        tableRow.addView(textView);
-        tableRow.addView(button);
-
-        /*
-         * View und TableRow zum eigentlichen Layout hinzufügen
-         */
-        tableLayout2.addView(tableRow);
-        tableLayout2.addView(view);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), ""+splitted[1]+" wurde aus der Liste gelöscht!",
-                        Toast.LENGTH_SHORT).show();
-
-                getInventory().remove(catecory, position);
-                getInventory().update();
-                TextView gesamt = findViewById(R.id.textPreisBestellen);
-                gesamt.setText("Es kostet " + getInventory().getCurrentPrize() + " Euro");
-                doReloadList();
+                    TextView gesamt = findViewById(R.id.textAbrechnung);
+                    gesamt.setText("Es kostet " + getInventory().getCurrentPrize() + " Euro");
+                    TextView gesamt2 = findViewById(R.id.textAbrechnung2);
+                    gesamt2.setText("Es kostet " + getInventory2().getCurrentPrize() + " Euro");
+                    doReloadList();
+                    doReloadList2();
+                 }
             }
         });
     }
@@ -237,7 +206,6 @@ public class Abrechnung extends AppCompatActivity {
         gesamtpreis = 0;
 
         request();
-        //request("Menues");
 
     }
 
@@ -255,11 +223,13 @@ public class Abrechnung extends AppCompatActivity {
                         @Override
                         public void run() {
                             String[] splitted = result.get(vaule).split(";");
-                            createButton(Integer.valueOf(splitted[0]), splitted);
                             gesamtpreis += Double.valueOf(splitted[2]);
                             System.out.println("Abrechnug: " + gesamtpreis + " mit " + splitted[2]);
 
                             preis(gesamtpreis);
+                            getInventory2().add("Rechnung", splitted[0] + ";" + splitted[1] + ";" + splitted[2]);
+
+                            doReloadList2();
                         }
                     });
                 }
@@ -288,94 +258,34 @@ public class Abrechnung extends AppCompatActivity {
 
     }
 
-    public void createCatecory(String catecory){
-
-        /*
-         * Erstelle ein TableRow um zwei Objekte nebeneinander zu bekommen
-         */
-        final TableRow tableRow = createNewTableRow();
-
-        /*
-         * Erstelle ein neuen Button, Text und View
-         */
-        TextView textView = createNewTextView(catecory);
-        View view = createNewView();
-
-        /*
-         * Button und Text zum TableRow Hinzufügen
-         */
-        tableRow.addView(textView);
-
-        /*
-         * View und TableRow zum eigentlichen Layout hinzufügen
-         */
-        tableLayout.addView(tableRow);
-        tableLayout.addView(view);
-    }
-
-    public TextView createNewTextView(String text){
-        /*
-         *  TextView erstellen und positionieren
-         */
-        TextView entry = new TextView(getContext());
-        TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(10,40,0,0);
-        layoutParams.gravity = Gravity.LEFT;
-        layoutParams.weight = 1;
-        entry.setLayoutParams(layoutParams);
-
-        /*
-         *  TextView Design festlegen
-         */
-        entry.setTextColor(Color.BLACK);
-        entry.setGravity(Gravity.LEFT);
-
-        /*
-         * TextView konfiguration
-         */
-        entry.setText(text);
-        return entry;
-    }
-
-    public void createCatecory(String[] catecory){
-
-        /*
-         * Erstelle ein TableRow um zwei Objekte nebeneinander zu bekommen
-         */
-        final TableRow tableRow = createNewTableRow();
-
-        /*
-         * Erstelle ein neuen Button, Text und View
-         */
-        TextView textView = createNewTextView(catecory);
-        View view = createNewView();
-
-        /*
-         * Button und Text zum TableRow Hinzufügen
-         */
-        tableRow.addView(textView);
-
-        /*
-         * View und TableRow zum eigentlichen Layout hinzufügen
-         */
-        tableLayout2.addView(tableRow);
-        tableLayout2.addView(view);
-    }
-
     public void doReloadList() {
-        tableLayout2.removeAllViews();
+        tableLayout.removeAllViews();
 
         /**
          * Request Delete
          */
         for (String vaule : getInventory().getMap().keySet()) {
-            createCatecory(vaule);
             for (int i=0; i < getInventory().getMap().get(vaule).size(); i++) {
                 String[] splitted = getInventory().getMap().get(vaule).get(i).split(";");
-                createButton(vaule, splitted, i);
+                createButton(vaule, splitted, i, tableLayout);
+            }
+            TextView gesamt = findViewById(R.id.textAbrechnung);
+            gesamt.setText("Es kostet " + getInventory().getCurrentPrize() + " Euro");
+        }
+    }
+    public void doReloadList2() {
+        tableLayout2.removeAllViews();
+
+        /**
+         * Request Delete
+         */
+        for (String vaule : getInventory2().getMap().keySet()) {
+            for (int i=0; i < getInventory2().getMap().get(vaule).size(); i++) {
+                String[] splitted = getInventory2().getMap().get(vaule).get(i).split(";");
+                createButton(vaule, splitted, i, tableLayout2);
             }
             TextView gesamt = findViewById(R.id.textAbrechnung2);
-            gesamt.setText("Es kostet " + getInventory().getCurrentPrize() + " Euro");
+            gesamt.setText("Es kostet " + getInventory2().getCurrentPrize() + " Euro");
         }
     }
 
@@ -396,7 +306,8 @@ public class Abrechnung extends AppCompatActivity {
          * Variablen initialisieren
          */
         context = this;
-        inventory = new Inventory(findViewById(R.id.textAbrechnung2));
+        inventory = new Inventory(findViewById(R.id.textAbrechnung));
+        inventory2 = new Inventory(findViewById(R.id.textAbrechnung2));
 
         /**
          * Handle finish all
@@ -412,7 +323,16 @@ public class Abrechnung extends AppCompatActivity {
         buttonFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Request().setAllFinishOrder(Tableselect.getTischnummer());
+                //new Request().setAllFinishOrder(Tableselect.getTischnummer());
+                getInventory().finished();
+                finish();
+            }
+        });
+        Button buttonFinish2 = (Button) findViewById(R.id.buttonAbrechnungFinihed2);
+        buttonFinish2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getInventory2().finished();
                 finish();
             }
         });
