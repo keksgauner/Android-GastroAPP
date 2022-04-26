@@ -1,3 +1,5 @@
+# THIS IS ONLY FOR EDUCATIONAL PURPOSES
+
 # Android-GastroAPP
 
 Das ist ein Projekt, was als schulisches Projekt gemacht worden ist.
