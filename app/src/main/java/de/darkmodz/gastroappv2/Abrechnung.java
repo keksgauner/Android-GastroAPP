@@ -205,7 +205,7 @@ public class Abrechnung extends AppCompatActivity {
         /**
          * Request Product
          */
-        new Request().getCurrentOrders(Tableselect.getTischnummer(), new RepositoryCallback<HashMap<String, String>>() {
+        new Request().getToPayOrders(Tableselect.getTischnummer(), new RepositoryCallback<HashMap<String, String>>() {
             @Override
             public void onComplete(HashMap<String, String> result) {
 
@@ -317,7 +317,6 @@ public class Abrechnung extends AppCompatActivity {
             public void onClick(View view) {
                 //new Request().setAllFinishOrder(Tableselect.getTischnummer());
                 getInventory().finished();
-                finish();
             }
         });
         Button buttonFinish2 = (Button) findViewById(R.id.buttonAbrechnungFinihed2);
@@ -325,7 +324,6 @@ public class Abrechnung extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 getInventory2().finished();
-                finish();
             }
         });
         update();
