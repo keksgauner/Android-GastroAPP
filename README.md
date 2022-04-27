@@ -1,4 +1,7 @@
 # THIS IS ONLY FOR EDUCATIONAL PURPOSES
+Included
+https://github.com/DarkModz-Official/Thresen---GastroApp
+https://github.com/DarkModz-Official/gastroapp-web
 
 # Android-GastroAPP
 
