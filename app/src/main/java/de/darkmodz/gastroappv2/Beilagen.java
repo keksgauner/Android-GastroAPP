@@ -2,10 +2,11 @@ package de.darkmodz.gastroappv2;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -15,23 +16,29 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+
 import java.util.HashMap;
 
 import de.darkmodz.gastroapp.api.RepositoryCallback;
 import de.darkmodz.gastroapp.api.Request;
+import de.darkmodz.gastroappv2.databinding.ActivityBeilagenBinding;
 
-public class Hauptspeise extends AppCompatActivity {
+public class Beilagen extends AppCompatActivity {
 
     /**
      * Globalvariablen
      */
-    private Hauptspeise context;
+    private Beilagen context;
     private TableLayout tableLayout;
 
     /**
      * Methoden
      */
-    public Hauptspeise getContext() {
+    public Beilagen getContext() {
         return context;
     }
 
@@ -152,31 +159,24 @@ public class Hauptspeise extends AppCompatActivity {
                 Toast.makeText(getContext(), ""+splitted[1]+" wurde zur Liste hinzugefügt!",
                         Toast.LENGTH_SHORT).show();
 
-                Bestellmenue.getInventory().add("Hauptspeise", splitted[0] + ";" + splitted[1] + ";" + splitted[2]);
+                Bestellmenue.getInventory().add("Beilagen", splitted[0] + ";" + splitted[1] + ";" + splitted[2]);
                 Bestellmenue.getInventory().update();
 
                 MainActivity.setCostomColorClick(button, Color.BLACK, Color.GREEN);
-
-                openBeilagen();
             }
         });
-    }
-
-    private void openBeilagen() {
-        Intent switchActivityIntent = new Intent(this, Beilagen.class);
-        startActivity(switchActivityIntent);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hauptspeise);
-        setTitle("Hauptspeise");
+        setContentView(R.layout.activity_beilagen);
+        setTitle("Beilagen");
 
         /**
          * Nutzerelemente hinzufügen
          */
-        tableLayout = (TableLayout) findViewById(R.id.hauptspeiseTableInvoices);
+        tableLayout = (TableLayout) findViewById(R.id.beilagenTableInvoices);
         tableLayout.removeAllViews();
 
         /**
@@ -187,7 +187,7 @@ public class Hauptspeise extends AppCompatActivity {
         /**
          * Handle zurück Button
          */
-        Button buttonZurueckVorspeise = (Button) findViewById(R.id.buttonZurueckHauptspeise);
+        Button buttonZurueckVorspeise = (Button) findViewById(R.id.buttonZurueckBeilagen);
         buttonZurueckVorspeise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -198,7 +198,7 @@ public class Hauptspeise extends AppCompatActivity {
         /**
          * Request Product
          */
-        new Request().getProducts("Hauptspeise", new RepositoryCallback<HashMap<String, String>>() {
+        new Request().getProducts("Beilagen", new RepositoryCallback<HashMap<String, String>>() {
             @Override
             public void onComplete(HashMap<String, String> result) {
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
