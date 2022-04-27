@@ -184,6 +184,48 @@ public class Request {
         }).start();
     }
 
+    public void getToPayOrders(final int tabelID, final RepositoryCallback<HashMap<String,String>> callback) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    System.out.println("Database is getting ask");
+                    Result.Feedback<ArrayList<HashMap<String,String>>> results = mysql.query("SELECT " +
+                            "`Orders`.`ID`, " +
+                            "`Orders`.`AccountID`, " +
+                            "`Orders`.`TabelID`, " +
+                            "`Orders`.`ProductID`, " +
+                            "`Products`.`Name`, " +
+                            "`Products`.`Price`, " +
+                            "`Orders`.`Quantity`, " +
+                            "`Orders`.`Paid`, " +
+                            "`Orders`.`Processing`," +
+                            "`Orders`.`Timestamp`" +
+                            "FROM `Orders` " +
+                            "LEFT JOIN `Products` ON `Products`.`ID` = `Orders`.`ProductID` " +
+                            "WHERE  `Orders`.`TabelID` = '" + tabelID +"' " +
+                            "AND `Orders`.`Paid` = false " +
+                            "AND `Processing` = false "  +
+                            ";");
+
+                    HashMap<String,String> result = new HashMap<>();
+
+                    for(int i=0; i < results.getData().size(); i++)
+                    {
+                        HashMap<String,String> oneMap = results.getData().get(i);
+                        // `ID`, `AccountID`, `TabelID`, `ProductID`, `Quantity`, `Paid`, `Processing`, `Timestamp`
+                        result.put(oneMap.get("ID"), oneMap.get("ID") + ";" + oneMap.get("Name") + ";" + oneMap.get("Price") + ";" + oneMap.get("Quantity"));
+                    }
+
+                    callback.onComplete(result);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    callback.onComplete(null);
+                }
+            }
+        }).start();
+    }
+
     public void getCurrentOrders(final String name, final RepositoryCallback<HashMap<String,String>> callback) {
         new Thread(new Runnable() {
             @Override
@@ -207,49 +249,6 @@ public class Request {
                             "WHERE  `Products`.`ID` = `Orders`.`ProductID` " +
                             "AND `Products`.`TypeID` = `Type`.`ID` " +
                             "AND `Orders`.`Paid` = false " +
-                            "AND `Processing` = true "  +
-                            ";");
-
-                    HashMap<String,String> result = new HashMap<>();
-
-                    for(int i=0; i < results.getData().size(); i++)
-                    {
-                        HashMap<String,String> oneMap = results.getData().get(i);
-                        // `ID`, `AccountID`, `TabelID`, `ProductID`, `Quantity`, `Paid`, `Processing`, `Timestamp`
-                        result.put(oneMap.get("ID"), oneMap.get("ID") + ";" + oneMap.get("Name") + ";" + oneMap.get("Price") + ";" + oneMap.get("Quantity"));
-                    }
-
-                    callback.onComplete(result);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    callback.onComplete(null);
-                }
-            }
-        }).start();
-    }
-
-    public void getToPayOrders(final int tabelID, final RepositoryCallback<HashMap<String,String>> callback) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    System.out.println("Database is getting ask");
-                    Result.Feedback<ArrayList<HashMap<String,String>>> results = mysql.query("SELECT " +
-                            "`Orders`.`ID`, " +
-                            "`Orders`.`AccountID`, " +
-                            "`Orders`.`TabelID`, " +
-                            "`Orders`.`ProductID`, " +
-                            "`Products`.`Name`, " +
-                            "`Products`.`Price`, " +
-                            "`Orders`.`Quantity`, " +
-                            "`Orders`.`Paid`, " +
-                            "`Orders`.`Processing`," +
-                            "`Orders`.`Timestamp`" +
-                            "FROM `Orders` " +
-                            "LEFT JOIN `Products` ON `Products`.`ID` = `Orders`.`ProductID` " +
-                            "WHERE  `Orders`.`TabelID` = '" + tabelID +"' " +
-                            "AND `Orders`.`Paid` = false " +
-                            "AND `Processing` = false "  +
                             ";");
 
                     HashMap<String,String> result = new HashMap<>();
