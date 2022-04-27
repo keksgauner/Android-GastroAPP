@@ -317,6 +317,8 @@ public class Abrechnung extends AppCompatActivity {
             public void onClick(View view) {
                 //new Request().setAllFinishOrder(Tableselect.getTischnummer());
                 getInventory().finished();
+                doReloadList();
+                doReloadList2();
             }
         });
         Button buttonFinish2 = (Button) findViewById(R.id.buttonAbrechnungFinihed2);
@@ -324,6 +326,8 @@ public class Abrechnung extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 getInventory2().finished();
+                doReloadList();
+                doReloadList2();
             }
         });
         update();
