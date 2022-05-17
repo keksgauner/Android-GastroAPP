@@ -1,7 +1,7 @@
 # THIS IS ONLY FOR EDUCATIONAL PURPOSES
 Included
-https://github.com/DarkModz-Official/Thresen---GastroApp
-https://github.com/DarkModz-Official/gastroapp-web
+https://github.com/DarkModz-Official/Thresen---GastroApp (https://github.com/keksgauner/CSharp-Thresen-GastroApp)
+https://github.com/DarkModz-Official/gastroapp-web (https://github.com/keksgauner/HTML-Web-GastroApp)
 
 # Was zu tun um diese App selbst zu benutzen?
 1. Einen mariadb oder mysql-server besitzen.
