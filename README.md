@@ -3,6 +3,14 @@ Included
 https://github.com/DarkModz-Official/Thresen---GastroApp
 https://github.com/DarkModz-Official/gastroapp-web
 
+# Was zu tun um diese App selbst zu benutzen?
+1. Einen mariadb oder mysql-server besitzen.
+2. GastroApp.sql importieren
+3. Im Paket de.darkmodz.gastroapp.api.Result folgendes anpassen:
+ mysql = new MySQL("localhost", "3306", "GastroApp","", "GastroApp");
+
+Wichtig ist: Mit git clone zurecht kommen und wie man ein Mysql server public hat. Auch nicht zu vergessen wie man eine APK zusammenbaut.
+
 # Android-GastroAPP
 
 Das ist ein Projekt, was als schulisches Projekt gemacht worden ist.
